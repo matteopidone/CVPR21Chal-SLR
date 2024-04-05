@@ -31,7 +31,7 @@ def gendata(data_path, label_path, out_path, part='train', config='27'):
         line = line.split(',')
 
         sample_names.append(line[0])
-        data.append(os.path.join(data_path, line[0] + '_color.mp4.npy'))
+        data.append(os.path.join(data_path, line[0] + '.npy'))
         labels.append(int(line[1]))
 
     fp = np.zeros((len(data), max_frame, num_joints, num_channels, max_body_true), dtype=np.float32)
@@ -72,10 +72,10 @@ def main(data_path, label_path, out_folder, points, part):
         config=points)
 
 if __name__ == '__main__':
-    data_path = '/data/sign/test_npy/npy'
-    label_path = '../data/sign/27/train_labels.csv'
-    out_folder = '../data/sign/'
+    data_path = '/home/perceive/slr/rgbd/data/train_npy3/'
+    label_path = '/home/perceive/slr/rgbd/data/train/train.csv'
+    out_folder = '/home/perceive/slr/rgbd/data/train_gendata/'
     points = '27'
-    part = 'test'
+    part = 'train'
     
     main(data_path, label_path, out_folder, points, part)
