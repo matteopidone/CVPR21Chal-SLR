@@ -112,3 +112,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+Conv3D/pretrained/
+Conv3D/runs/
+Conv3D/results/
+Conv3D/checkpoint/

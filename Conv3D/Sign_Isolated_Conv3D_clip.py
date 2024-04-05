@@ -1,3 +1,4 @@
+#Creare le cartelle results, log, checkpoint
 import os
 import sys
 from datetime import datetime
@@ -29,17 +30,17 @@ class LabelSmoothingCrossEntropy(nn.Module):
 
 # Path setting
 exp_name = 'rgb_final'
-data_path = "../data/train_frames"
-data_path2 = "../data/val_frames"
-label_train_path = "data/train_labels.csv"
-label_val_path = "data/val_gt.csv"
-model_path = "checkpoint/{}".format(exp_name)
+data_path = "/home/perceive/slr/rgbd/data/train_frames/"
+data_path2 = "/home/perceive/slr/rgbd/data/train_frames/"
+label_train_path = "/home/perceive/slr/rgbd/data/train/train.csv"
+label_val_path = "/home/perceive/slr/rgbd/data/train/train.csv"
+model_path = "/home/perceive/slr/rgbd/CVPR21Chal-SLR/Conv3D/checkpoint/{}".format(exp_name)
 if not os.path.exists(model_path):
     os.mkdir(model_path)
-if not os.path.exists(os.path.join('results', exp_name)):
-    os.mkdir(os.path.join('results', exp_name))
-log_path = "log/sign_resnet2d+1_{}_{:%Y-%m-%d_%H-%M-%S}.log".format(exp_name, datetime.now())
-sum_path = "runs/sign_resnet2d+1_{}_{:%Y-%m-%d_%H-%M-%S}".format(exp_name, datetime.now())
+if not os.path.exists(os.path.join('/home/perceive/slr/rgbd/CVPR21Chal-SLR/Conv3D/results', exp_name)):
+    os.mkdir(os.path.join('/home/perceive/slr/rgbd/CVPR21Chal-SLR/Conv3D/results', exp_name))
+log_path = "/home/perceive/slr/rgbd/CVPR21Chal-SLR/Conv3D/log/sign_resnet2d+1_{}_{:%Y-%m-%d_%H-%M-%S}.log".format(exp_name, datetime.now())
+sum_path = "/home/perceive/slr/rgbd/CVPR21Chal-SLR/Conv3D/runs/sign_resnet2d+1_{}_{:%Y-%m-%d_%H-%M-%S}".format(exp_name, datetime.now())
 phase = 'Train'
 # Log to file & tensorboard writer
 logging.basicConfig(level=logging.INFO, format='%(message)s', handlers=[logging.FileHandler(log_path), logging.StreamHandler()])
@@ -54,9 +55,9 @@ os.environ["CUDA_VISIBLE_DEVICES"]="0,1,2,3"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Hyperparams
-num_classes = 226 
-epochs = 100
-batch_size = 24
+num_classes = 125 
+epochs = 5
+batch_size = 4
 learning_rate = 1e-3#1e-3 Train 1e-4 Finetune
 weight_decay = 1e-4 #1e-4
 log_interval = 80
@@ -87,7 +88,7 @@ if __name__ == '__main__':
 
     model = r2plus1d_18(pretrained=True, num_classes=500)
     # load pretrained
-    checkpoint = torch.load('pretrained/slr_resnet2d+1.pth')
+    checkpoint = torch.load('/home/perceive/slr/rgbd/CVPR21Chal-SLR/Conv3D/pretrained/slr_resnet2d+1.pth')
     new_state_dict = OrderedDict()
     for k, v in checkpoint.items():
         name = k[7:] # remove 'module.'
