@@ -15,7 +15,7 @@ class TorchDataset(Dataset):
     fea_dir,
     isaug=False,# set True for training, False for finetuning
     repeat=1):
-        self.load_name = './train_val_split.mat'
+        self.load_name = '/home/perceive/slr/rgbd/CVPR21Chal-SLR/SSTCN/data.mat'
         self.mat = scipy.io.loadmat(self.load_name)
         self.istrain = istrain
         self.isaug = isaug
@@ -55,15 +55,15 @@ class TorchDataset(Dataset):
         fea_label_list = []
         if self.istrain:
             for idx in range(self.train_number):
-              name = self.train_file_name[idx][0][0][0][0]+ '_color'+ '.pt'
+              name = self.train_file_name[idx][0][0]+ '_rgb'+ '.pt'
               labels = self.train_label[idx][0]
               fea_label_list.append((name, labels))
-              name = self.train_file_name[idx][0][0][0][0]+ '_color'+ '_flip.pt'
+              name = self.train_file_name[idx][0][0]+ '_rgb'+ '_flip.pt'
               labels = self.train_label[idx][0]
               fea_label_list.append((name, labels))
         else:
             for idx in range(self.test_number):
-              name = self.test_file_name[idx][0][0][0][0]+ '_color'+ '.pt'
+              name = self.test_file_name[idx][0][0]+ '_rgb'+ '.pt'
               labels = int(self.test_label[idx][0])
               fea_label_list.append((name, labels))
         return fea_label_list

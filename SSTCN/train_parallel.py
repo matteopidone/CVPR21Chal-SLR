@@ -12,10 +12,11 @@ import datetime
 import os
 
 # Parametri definiti staticamente
-dataset_path = "./data/train_features"
+dataset_path = "/home/perceive/slr/rgbd/data/train_wholepose_feature"
+dataset_test_path = "/home/perceive/slr/rgbd/data/test_wholepose_feature"
 save_path = "./model_checkpoints"
 num_epochs = 400
-batch_size = 60
+batch_size = 4 #60
 lr = 0.001
 wd = 0.0001
 checkpoint_model = ""
@@ -36,7 +37,7 @@ train_dataset = TorchDataset(istrain=True, fea_dir=dataset_path, isaug=True, rep
 train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=32, pin_memory=True)
 
 # Define test set
-test_dataset = TorchDataset(istrain=False, fea_dir=dataset_path, repeat=1)
+test_dataset = TorchDataset(istrain=False, fea_dir=dataset_test_path, repeat=1)
 test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=32, pin_memory=True)
 
 # Classification criterion
