@@ -3,12 +3,12 @@ import numpy as np
 from numpy.lib.format import open_memmap
 
 sets = {
-    'train', 'val', 'test'
+    'test' #train, val
 
 }
 
 datasets = {
-    'sign/27_2'
+    '27'
 }
 
 parts = {
@@ -20,11 +20,11 @@ for dataset in datasets:
     for set in sets:
         for part in parts:
             print(dataset, set, part)
-            data = np.load('../data/{}/{}_data_{}.npy'.format(dataset, set, part))
+            data = np.load('/home/perceive/slr/rgbd/data/test_gendata/{}/{}_data_{}.npy'.format(dataset, set, part))
             N, C, T, V, M = data.shape
             print(data.shape)
             fp_sp = open_memmap(
-                '../data/{}/{}_data_{}_motion.npy'.format(dataset, set, part),
+                '/home/perceive/slr/rgbd/data/test_gendata/{}/{}_data_{}_motion.npy'.format(dataset, set, part),
                 dtype='float32',
                 mode='w+',
                 shape=(N, C, T, V, M))

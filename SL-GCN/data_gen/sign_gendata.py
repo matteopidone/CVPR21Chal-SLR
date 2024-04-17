@@ -72,10 +72,10 @@ def main(data_path, label_path, out_folder, points, part):
         config=points)
 
 if __name__ == '__main__':
-    data_path = '/home/perceive/slr/rgbd/data/train_npy3/'
-    label_path = '/home/perceive/slr/rgbd/data/train/train.csv'
-    out_folder = '/home/perceive/slr/rgbd/data/train_gendata/'
+    data_path = '/home/perceive/slr/rgbd/data/test_npy3/'
+    label_path = '/home/perceive/slr/rgbd/CVPR21Chal-SLR/test_rgb.csv'
+    out_folder = '/home/perceive/slr/rgbd/data/test_gendata/'
     points = '27'
-    part = 'train'
+    part = 'test'
     
     main(data_path, label_path, out_folder, points, part)

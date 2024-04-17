@@ -35,7 +35,7 @@ paris = {
                               (24,25),(26,27),(28,29),(30,31),
                               (10,12),(11,22)
     ),
-    'sign/27_2': ((5, 6), (5, 7),
+    '27': ((5, 6), (5, 7),
                               (6, 8), (8, 10), (7, 9), (9, 11), 
                               (12,13),(12,14),(12,16),(12,18),(12,20),
                               (14,15),(16,17),(18,19),(20,21),
@@ -46,11 +46,11 @@ paris = {
 }
 
 sets = {
-    'train', 'val', 'test'
+    'test' #train, val
 }
 
 datasets = {
-    'sign/27_2'
+    '27'
 }
 
 from tqdm import tqdm
@@ -58,10 +58,10 @@ from tqdm import tqdm
 for dataset in datasets:
     for set in sets:
         print(dataset, set)
-        data = np.load('../data/{}/{}_data_joint.npy'.format(dataset, set))
+        data = np.load('/home/perceive/slr/rgbd/data/test_gendata/{}/{}_data_joint.npy'.format(dataset, set))
         N, C, T, V, M = data.shape
         fp_sp = open_memmap(
-            '../data/{}/{}_data_bone.npy'.format(dataset, set),
+            '/home/perceive/slr/rgbd/data/test_gendata/{}/{}_data_bone.npy'.format(dataset, set),
             dtype='float32',
             mode='w+',
             shape=(N, 3, T, V, M))
