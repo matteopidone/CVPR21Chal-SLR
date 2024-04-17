@@ -13,10 +13,10 @@ import os
 
 # Parametri definiti staticamente
 dataset_path = "/home/perceive/slr/rgbd/data/train_wholepose_feature"
-dataset_test_path = "/home/perceive/slr/rgbd/data/test_wholepose_feature"
+dataset_test_path = "/home/perceive/slr/rgbd/data/val_wholepose_feature"
 save_path = "./model_checkpoints"
 num_epochs = 400
-batch_size = 4 #60
+batch_size = 60 #60
 lr = 0.001
 wd = 0.0001
 checkpoint_model = ""
@@ -44,7 +44,7 @@ test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False,
 cls_criterion = LabelSmoothingCrossEntropy().cuda()
 
 # Define network
-model = T_Pose_model(frames_number=60, joints_number=33, n_classes=226)
+model = T_Pose_model(frames_number=60, joints_number=33, n_classes=156)
 
 if checkpoint_model:
     model.load_state_dict(torch.load(checkpoint_model, map_location='cuda:0'))
